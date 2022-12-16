@@ -1,15 +1,28 @@
-function pohniHadem(dolu, doprava) {
-  const had = document.querySelector(".had");
-  console.log("Had je na " + had.id);
+let had = [document.querySelector(" .had")]
 
-  let radek = parseInt(had.id.split(":")[0]);
-  let sloupec = parseInt(had.id.split(":")[1]);
+function pohniHadem(dolu, doprava) {
+  const hadHlava = had[0];
+  console.log("Had je na " + hadHlava.id);
+
+  let radek = parseInt(hadHlava.id.split(":")[0]);
+  let sloupec = parseInt(hadHlava.id.split(":")[1]);
   const idCil = radek + dolu + ":" + (sloupec + doprava);
   console.log("Had bude na " + idCil);
 
-  const cil = document.getElementById(idCil);
-  cil.classList.add("had");
-  had.classList.remove("had");
+  const cilovepolicko = document.getElementById(idCil)
+
+  had.unshift(cilovepolicko);
+
+  cilovepolicko.classList.add("had");
+
+  if (cilovepolicko.classList.contains("zradlo")) {
+    console.log("Had bude žrát");
+    cilovepolicko.classList.remove("zradlo");
+  } else {
+    const polickoKterePrestavaBytHadem = had.pop();
+    polickoKterePrestavaBytHadem.classList.remove("had");
+  }
+
 }
 
 function pohyb(udalost) {
